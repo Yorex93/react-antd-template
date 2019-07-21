@@ -1,10 +1,10 @@
 import React, { FC, Suspense, lazy, useEffect, useCallback } from "react";
-import { IUserState } from "../redux/user/types";
+import { IUserState, IUser } from "../redux/user/types";
 import { IApplicationState } from "../redux/application/types";
 import { RouteComponentProps, Switch, Route, withRouter } from "react-router-dom";
 import { RootState } from "../redux";
 import { Dispatch, bindActionCreators } from "redux";
-import { setAppLoading, setMobile } from "../redux/application/actions";
+import { setAppLoading, setMobile, subscribeNotifications } from "../redux/application/actions";
 import { logout, passwordChanged } from "../redux/user/actions";
 import { connect } from "react-redux";
 import FeatureContainer from "../components/feature";
@@ -21,15 +21,16 @@ interface AppRoutesStateProps{
 interface AppRoutesDispatchProps{
     setAppLoading: (isLoading: boolean) => void,
     setMobile: (isMobile: boolean) => void,
-    passwordChanged: () => void
+    passwordChanged: () => void,
+    subscribeNotifications: (user: IUser) => void,
     logout: () => void
 }
 
 type Props = AppRoutesStateProps & AppRoutesDispatchProps & RouteComponentProps;
 
 const Routes : FC<Props> = (props) => {
-
     const setMobile = props.setMobile;
+    const sub = props.subscribeNotifications;
 
     const updateDimensions = useCallback(
         () => {
@@ -49,6 +50,15 @@ const Routes : FC<Props> = (props) => {
             window.removeEventListener("resize", () => updateDimensions());
         }
     }, [updateDimensions]);
+
+    useEffect(() => {
+        sub({
+           firstName: "",
+           lastName: "",
+           username: 'Test',
+           email: ''
+       }) 
+    }, [sub])
 
    
 
@@ -76,7 +86,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
     setAppLoading: setAppLoading,
     logout: logout,
     setMobile: setMobile,
-    passwordChanged: passwordChanged
+    passwordChanged: passwordChanged,
+    subscribeNotifications: subscribeNotifications
 }, dispatch);
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Routes));

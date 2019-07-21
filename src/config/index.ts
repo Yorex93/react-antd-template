@@ -12,6 +12,7 @@ class AppConfig {
     isMock: boolean;
     isDebug: boolean;
     mockApiResponseDelay: number;
+    socketUrl: string;
 
     constructor(){
         this.API_ENDPOINT = "";
@@ -26,6 +27,7 @@ class AppConfig {
         this.isMock = process.env.REACT_APP_MOCK === 'true'
         this.isDebug = process.env.REACT_APP_DEBUG === 'true'
         this.mockApiResponseDelay = 1500;
+        this.socketUrl = process.env.REACT_APP_SOCKET_URL || ""
     }
 }
 

@@ -15,6 +15,8 @@ export enum AppActions {
     CLEAR_NOTIFICATIONS = "@@app/CLEAR_NOTIFICATIONS",
     FETCH_ADVERTS = "@@app/FETCH_ADVERTS",
     SET_ADVERTS = "@@app/SET_ADVERTS",
+    SUBSCRIBE_NOTIFICATIONS = "@app/SUBSCRIBE_NOTIFICATIONS",
+    SEND_MESSAGE = "@app/SEND_MESSAGE"
 }
 
 export interface AppNotification extends SocketMessage{

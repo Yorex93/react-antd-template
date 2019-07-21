@@ -1,9 +1,52 @@
-import { all, call, fork, put, takeEvery } from 'redux-saga/effects'
-import { AppActions } from './types'
-import { setAds } from './actions'
+import { all, call, fork, put, takeEvery, take, cancel, takeLatest } from 'redux-saga/effects';
+import { eventChannel } from 'redux-saga';
+import { AppActions, AppNotification } from './types'
+import { setAds, addNotification } from './actions'
 import { AxiosResponse} from "axios";
 import HTTPClient from '../../utils/http-client';
 import { AppAdvertisement } from '../../types/adverts';
+import appSocket from "../../sockets";
+import { UserActionTypes } from '../user/types';
+  
+function subscribe(socket: SocketIOClient.Socket) {
+    return eventChannel(emit => {
+        socket.on('notification', (notification: AppNotification) => {
+            console.log("Notification Received", { notification });
+            emit(addNotification(notification));
+        });
+      return () => {};
+    });
+}
+
+function* read(socket: SocketIOClient.Socket) {
+    const channel = yield call(subscribe, socket);
+    while (true) {
+      let action = yield take(channel);
+      yield put(action);
+    }
+  }
+  
+function* write(socket: SocketIOClient.Socket) {
+    while (true) {
+        const { payload } = yield take(AppActions.SEND_MESSAGE);
+        socket.emit('message', payload);
+    }
+}
+
+function* handleIO(socket: SocketIOClient.Socket) {
+    yield fork(read, socket);
+    yield fork(write, socket);
+}
+
+function* setUpSockets({ payload }: any) {
+    while (true) {
+        appSocket.emit('notifications', { username: payload.username });
+        const task = yield fork(handleIO, appSocket);
+        yield take(UserActionTypes.LOGOUT_SUCCESS);
+        yield cancel(task);
+        appSocket.emit('logout');
+    }
+}
 
 
 function* getAdverts() {
@@ -27,11 +70,15 @@ function* getAdverts() {
 
 
 function* watchFetchAdverts() {
-    yield takeEvery(AppActions.FETCH_ADVERTS, getAdverts)
+    yield takeEvery(AppActions.SUBSCRIBE_NOTIFICATIONS, setUpSockets)
+}
+
+function* watchSubscriptions() {
+    yield takeLatest(AppActions.FETCH_ADVERTS, getAdverts)
 }
 
 function* appSaga() {
-    yield all([fork(watchFetchAdverts)])
+    yield all([fork(watchFetchAdverts), fork(watchSubscriptions)])
 }
 
 export default appSaga;

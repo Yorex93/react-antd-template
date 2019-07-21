@@ -2,9 +2,7 @@ export interface IUser{
     firstName: string,
     lastName: string,
     email: string,
-    balance: number,
-    address?: string,
-    phone: string
+    username: string,
 }
 
 export interface ILoginRequest{
