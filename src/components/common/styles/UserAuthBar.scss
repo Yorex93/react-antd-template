@@ -1,0 +1,46 @@
+@import "../../../styles//helpers.scss";
+
+.app-user-auth-bar {
+    display: flex;
+    justify-content: flex-end;
+    
+    input{
+        height: 2.3rem;
+        background: darken($primary-color, 4);
+        border: 1px solid #525390;
+        outline: none;
+        padding: 0.5rem 0.5rem;
+        color: #FFFFFF;
+        font-size: 0.8rem;
+        width: 180px;
+        margin-right: 0.5rem;
+    }
+
+    button {
+        border: 1px solid $secondary-color;
+        border-radius: 0;
+        background-color: transparent;
+        color: $secondary-color;
+        transition: 0.3s ease-in-out;
+        font-size: 0.9rem;
+
+        &:hover{
+            background-color: $secondary-color;
+            color: #FFFFFF;
+        }
+
+        @include handheld {
+            height: 24px;
+        }
+    }
+
+    .login-btn{
+        margin-right: 0.5rem;
+    }
+
+    .register-btn{
+        margin-right: 0.5rem;
+        background-color: $secondary-color;
+        color: $primary-color;
+    }
+}

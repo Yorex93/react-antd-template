@@ -1,0 +1,44 @@
+@import '../../../styles/helpers.scss';
+
+.app-footer{
+    background-color: $sidebar-bg-color;
+    padding: 2rem 0;
+
+    a {
+        color: #FFFFFF;
+        transition: 0.3s ease-in-out;
+        font-weight: 500;
+
+        &:hover{
+            color: $secondary-color;
+        }
+    }
+
+    .links {
+        @include handheld(){
+            margin-bottom: 2rem;
+        }
+    }
+    .links a{
+        display: block;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+    }
+
+    .heading{
+        color: #FFFFFF;
+        font-size: 1.2rem;
+        display: block;
+        margin-bottom: 1.2rem;
+    }
+
+    .logo {
+        display: block;
+        margin: 0 auto
+    }
+}
+
+.app-footer-secondary {
+    background: #FFFFFF;
+    min-height: 5vh;
+}

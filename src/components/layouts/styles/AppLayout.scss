@@ -1,0 +1,24 @@
+@import '../../../styles/helpers.scss';
+.app-layout{
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.app-sidebar{
+    background: $sidebar-bg-color;
+}
+
+.ant-drawer-body{
+    padding: 0;
+}
+
+.app-drawer {
+    margin: 0 !important;
+    min-height: 100vh;
+    padding: 1rem 0;
+
+    img.logo {
+        display: block;
+        margin: 0 auto
+    }
+}

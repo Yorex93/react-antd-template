@@ -1,0 +1,52 @@
+@import '../../styles/helpers.scss';
+
+.landing-page {
+    background-color: $primary-color;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    &__logo {
+        margin-bottom: 2rem;
+    }
+
+    &__selector {
+        display: flex;
+    }
+
+
+    .selector a {
+        @include flex-center(column);
+        padding: 2rem;
+
+        img {
+            @include phone(){
+                width: 10rem;
+            }
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        text-decoration: none;
+        transition: 0.3s ease-in-out;
+
+        span {
+            color: #FFFFFF;
+            font-size: 1.2rem;
+            transition: 0.3s ease-in-out;
+        }
+
+        &:hover {
+            span{
+                color: $secondary-color;
+            }
+
+            img {
+                opacity: 1;
+            }
+        }
+    }
+}
+

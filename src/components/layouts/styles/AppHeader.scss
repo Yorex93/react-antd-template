@@ -1,0 +1,176 @@
+@import '../../../styles/helpers.scss';
+
+.app-header{
+    background-color: $primary-color;
+    
+    &__primary{
+        padding: 0 2rem;
+        display: flex;
+        .logo img{
+            width: 13rem;
+            padding: 1.5rem 0;
+            min-height: 4rem;
+
+            @include phone {
+                padding: 0.5rem 0;
+                min-height: unset; 
+            }
+        }
+
+        @include handheld{
+            padding: 1.2rem 1rem;
+            .logo img{
+                width: 100%;
+            }
+        }
+
+        
+    }
+
+    &__secondary{
+        background: #FFFFFF;
+        min-height: 3rem;
+        display: flex;
+
+        > div {
+            flex: 1;
+        }
+
+        ul {
+            margin-bottom: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .ul-wrapper{
+            display: flex;
+            align-items: center;
+        }
+
+        li {
+            display: inline-block;
+
+            a {
+                padding: 0 2rem;
+                display: flex;
+                transition: 0.3s ease-in-out;
+                font-weight: 400;
+
+                &.active {
+                    color: $primary-color;
+                    background-color: #FFFFFF;
+                    border-top-right-radius: 5px;
+                    border-top-left-radius: 5px;
+                }
+
+                &:hover{
+                    color: $secondary-color;
+                }
+
+            }
+        }
+
+        .nav-mobile {
+            ul{
+                display: flex;
+                flex: 1;
+                background-color: $primary-color;
+                border-top: 1px solid rgba(#FFFFFF, 0.2);
+            }
+
+            li {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+
+                &:not(:last-child){
+                    a {
+                        border-right: 1px solid rgba(#FFFFFF, 0.2);
+                    }
+                }
+            }
+
+            a {
+                display: flex;
+                align-items: center;
+                flex: 1;
+                justify-content: center;
+                padding: 1.5rem;
+                color: #FFFFFF;
+
+                &.active {
+                    border-radius: 0;
+                    color: #FFFFFF;
+                    background-color: $primary-color;
+                }
+            }
+        }
+    }
+
+    .nav-links {
+        color: #FFFFFF;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-end;
+        font-size: 1.1rem;
+
+        a {
+            color: #FFFFFF;
+        }
+
+        ul {
+            margin-bottom: 0;
+            padding: 0;
+            display: flex;
+        }
+        
+        li {
+            display: inline-block;
+
+            a {
+                padding: 0.5rem 2rem;
+                display: flex;
+                transition: 0.3s ease-in-out;
+                font-weight: 500;
+
+                &.active {
+                    color: $primary-color;
+                    background-color: #FFFFFF;
+                    border-top-right-radius: 5px;
+                    border-top-left-radius: 5px;
+                }
+
+                &:hover{
+                    color: $secondary-color;
+                }
+
+            }
+        }
+    }
+
+    &__secondary-right{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+
+.user-details {
+    display: flex;
+    align-items: center; 
+
+    > div {
+        flex: 1;
+    }
+}
+
+.sidebar-toggle {
+    i {
+        color: #FFFFFF;
+        font-size: 2.0rem;
+    }
+
+    display: flex;
+    align-items: center;
+}

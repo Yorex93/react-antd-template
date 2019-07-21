@@ -1,0 +1,39 @@
+@import './variables.scss';
+
+@mixin lowResPhone {
+	@media (max-width: 320px) {
+		@content;
+	}
+}
+
+@mixin phone {
+	@media (max-width: #{$tablet-width - 1px}) {
+		@content;
+	}
+}
+
+@mixin handheld {
+	@media (max-width: #{$desktop-width  - 1px}) {
+		@content;
+	}
+}
+
+
+@mixin tablet {
+	@media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+		@content;
+	}
+}
+
+@mixin desktop {
+	@media (min-width: #{$desktop-width}) {
+		@content;
+	}
+}
+
+@mixin flex-center($axis: row) {
+	display: flex;
+	flex-direction: $axis;
+	justify-content: center;
+	align-items: center;
+}
